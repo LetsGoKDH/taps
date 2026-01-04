@@ -1,0 +1,57 @@
+﻿# Python / venv
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Test / build artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets / credentials
+*.key
+*.pem
+*.p12
+*.crt
+*.token
+*.secret
+**/secrets.*
+.env.*
+HF_TOKEN*
+huggingface_token*
+
+# Data / audio / large files (DO NOT COMMIT)
+data/
+datasets/
+cache/
+outputs/
+runs/
+logs/
+wandb/
+mlruns/
+*.wav
+*.flac
+*.mp3
+*.m4a
+*.ogg
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# Local scratch
+tmp/
+scratch/
