@@ -10,5 +10,7 @@
 ### Docs
 - docs: add CHANGELOG (4211b97)
 - docs: update changelog (auto) (10a62ce)
+- docs: regenerate changelog (5fd916b)
+- docs: add project docs scaffold (07ff086)
 ### Other
 - Initial commit (76fc654)
