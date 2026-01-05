@@ -1,8 +1,5 @@
 # =========================
 # Korean text normalization v0.6.4 (STRUCTURAL FIX 3)
-# - km handling: NEVER spell out as 케이엠 when it's a unit; normalize to 키로미터 ONLY in numeric+unit context
-#   (pokm 같은 단어는 그대로 피오케이엠)
-# - Add unicode '㎞' handling -> km
 # =========================
 
 import re
