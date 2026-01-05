@@ -20,18 +20,27 @@ TAPS 데이터셋(Training/Validation)을 대상으로 한국어 음성 데이�
 
 ## 현재 진행 상황 (Current Status)
 
-### 사전 작업 완료
-본격적인 연구 시작 전, 프로젝트 이해를 위한 탐색적 작업을 완료했습니다.
+### 완료한 작업
+- ✅ **3.1 라벨링 자동화 워크플로우 조사** (2026-01-06)
+  - 베이스 워크플로우 확정: **하이브리드 접근** (ASR → 트리아지 → 선택적 검수 → 규칙 정규화)
+  - ASR 모델 벤치마크 완료: **Whisper Large-v3 선정** (CER 6.71%)
+  - 한국어 도메인 적용 방법 결정: 결정론적 규칙 기반, 모듈화, 보수적 정규화
+  - 상세: [docs/3.1_labeling_workflow_survey.md](docs/3.1_labeling_workflow_survey.md)
+
+### 사전 작업
 - Normalizer v0.6.4 임시 구현 ([src/taps/normalizer.py](src/taps/normalizer.py))
 - Whisper 기반 ASR + 정규화 파이프라인 테스트 ([docs/pre_test.ipynb](docs/pre_test.ipynb))
 
 ### 다음 단계
-로드맵 3.1부터 체계적으로 진행할 예정입니다. 자세한 진행 상황은 [docs/progress.md](docs/progress.md)를 참고해주세요.
+로드맵 3.2부터 진행 예정입니다. 자세한 진행 상황은 [docs/progress.md](docs/progress.md)를 참고해주세요.
 
 ---
 
 ## 기술 스택 (Tech Stack)
 - Python 3.10+
+- **ASR 모델**: Whisper Large-v3 (`Systran/faster-whisper-large-v3`)
+  - 설정: beam_size=5, language="ko", temperature=[0.0, 0.2, 0.4]
+  - TAPS Test CER: 6.71%
 - 정규화 엔진: 규칙 기반(Regex/룰) + 필요 시 한국어 형태소 도구(예: Kiwi) 보조
 - 테스트: `pytest`
 - 코드 품질(선택): `ruff` / `black`
