@@ -1,1 +1,14 @@
-﻿pytest
+﻿# Core dependencies
+kiwipiepy>=0.15.0
+datasets>=2.14.0
+
+# Testing
+pytest>=7.4.0
+
+# Optional: for Jupyter notebooks
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Optional: for code quality
+ruff>=0.1.0
+black>=23.0.0
