@@ -55,3 +55,6 @@ mlruns/
 # Local scratch
 tmp/
 scratch/
+
+# Personal helper scripts
+scripts/
