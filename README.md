@@ -41,21 +41,51 @@ TAPS 데이터셋(Training/Validation)을 대상으로 한국어 음성 데이�
 
 ## Quickstart (Install / Run / Test)
 
-```bash
+### 설치 (Installation)
+
+```powershell
 # 1) Create venv
 python -m venv .venv
 
 # 2) Activate venv (Windows PowerShell)
 .venv\Scripts\Activate.ps1
 
-# 3) Install deps
+# 3) Install dependencies
 pip install -r requirements.txt
 
-# 4) Run normalization (placeholder; finalize after scripts/ are ready)
-python scripts/run_normalize.py --in input.txt --out output.txt
+# 4) Set PYTHONPATH
+$env:PYTHONPATH="src"
+```
 
-# 5) Evaluate CER (placeholder)
-python scripts/eval_cer.py --pred pred.txt --gold gold.txt
+### Normalizer 사용 (Using Normalizer)
 
-# 6) Run tests
+```python
+from taps.normalizer import normalize_v064
+
+# 기본 사용
+text = "2024년 1월 5일 COVID-19 확진자 350명"
+normalized = normalize_v064(text)
+print(normalized)
+# 출력: 이천 이십사 년 일 월 오 일 코로나 일구 확진자 삼백 오십 명
+
+# 디버그 모드
+normalized = normalize_v064(text, debug=True)
+```
+
+### 테스트 노트북 실행 (Running Test Notebook)
+
+Jupyter Notebook으로 ASR + 정규화 파이프라인을 테스트할 수 있습니다:
+
+```powershell
+# Jupyter 설치 (필요시)
+pip install jupyter
+
+# 노트북 실행
+jupyter notebook docs/pre_test.ipynb
+```
+
+### 테스트 실행 (Running Tests)
+
+```powershell
 pytest -q
+```
