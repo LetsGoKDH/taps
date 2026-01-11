@@ -27,12 +27,19 @@ TAPS 데이터셋(Training/Validation)을 대상으로 한국어 음성 데이�
   - 한국어 도메인 적용 방법 결정: 결정론적 규칙 기반, 모듈화, 보수적 정규화
   - 상세: [docs/3.1_labeling_workflow_survey.md](docs/3.1_labeling_workflow_survey.md)
 
+- ✅ **3.2 한국어 도메인 조사** (2026-01-12, 진행 중)
+  - 한국어 특성 분석: 숫자 표기, 알파벳/외래어, 복합명사, 1음절 명사
+  - **Kornormalizer 모듈 구현**: [LetsGoKDH/Kornormalizer](https://github.com/LetsGoKDH/Kornormalizer)
+    - NumberToKorean, AlphabetToKorean, CompoundNounSplitter
+    - 사전 데이터 152,000+ 항목 (국립국어원 + 법제처)
+  - 상세: [docs/3.2_korean_domain_analysis.md](docs/3.2_korean_domain_analysis.md)
+
 ### 사전 작업
 - Normalizer v0.6.4 임시 구현 ([src/taps/normalizer.py](src/taps/normalizer.py))
 - Whisper 기반 ASR + 정규화 파이프라인 테스트 ([docs/pre_test.ipynb](docs/pre_test.ipynb))
 
 ### 다음 단계
-로드맵 3.2부터 진행 예정입니다. 자세한 진행 상황은 [docs/progress.md](docs/progress.md)를 참고해주세요.
+로드맵 3.3부터 진행 예정입니다. 자세한 진행 상황은 [docs/progress.md](docs/progress.md)를 참고해주세요.
 
 ---
 
