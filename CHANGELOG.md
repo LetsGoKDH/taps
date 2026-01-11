@@ -3,6 +3,13 @@
 커밋 이력 기반으로 자동 생성됩니다.
 ## [Unreleased]
 
+### Docs
+- docs: update 3.2 progress with Korean domain characteristics and Kornormalizer module
+  - Add Korean speech transcription normalization domain analysis
+  - Introduce Kornormalizer module (NumberToKorean, AlphabetToKorean, CompoundNounSplitter)
+  - Document 152,000+ dictionary entries from 국립국어원 and 법제처
+  - Update next steps for TAPS integration
+
 ### Chore
 - chore: add gitignore and changelog (1e326c1)
 - chore: add changelog generator (2deff8d)
