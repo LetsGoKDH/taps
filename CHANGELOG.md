@@ -4,11 +4,11 @@
 ## [Unreleased]
 
 ### Docs
-- docs: update 3.2 progress with Korean domain characteristics and Kornormalizer module
-  - Add Korean speech transcription normalization domain analysis
-  - Introduce Kornormalizer module (NumberToKorean, AlphabetToKorean, CompoundNounSplitter)
-  - Document 152,000+ dictionary entries from 국립국어원 and 법제처
-  - Update next steps for TAPS integration
+- docs: add 3.2 Korean domain analysis document
+  - Add comprehensive Korean speech transcription normalization domain analysis
+  - Document Kornormalizer module (NumberToKorean, AlphabetToKorean, CompoundNounSplitter)
+  - Include 152,000+ dictionary entries from 국립국어원 and 법제처
+  - Define normalization pipeline and remaining tasks
 
 ### Chore
 - chore: add gitignore and changelog (1e326c1)
