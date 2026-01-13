@@ -54,7 +54,7 @@ TAPS 데이터셋(Training/Validation)을 대상으로 한국어 음성 데이�
 - **ASR 모델**: Whisper Large-v3 (`Systran/faster-whisper-large-v3`)
   - 설정: beam_size=5, language="ko", temperature=[0.0, 0.2, 0.4]
   - TAPS Test CER: 6.71%
-- **정규화 엔진**: [Kornormalizer](https://github.com/LetsGoKDH/Kornormalizer) (규칙 기반 + kiwipiepy)
+- **정규화 엔진**: [Kornormalizer](https://github.com/LetsGoKDH/Kornormalizer) (규칙 기반 + 사전)
 - 테스트: `pytest`
 - 코드 품질(선택): `ruff` / `black`
 - 평가: CER/WER 계산 스크립트(한국어 정규화 반영)

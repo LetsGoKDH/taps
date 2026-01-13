@@ -53,7 +53,6 @@
   - ASR: Whisper Large-v3 (`Systran/faster-whisper-large-v3`)
   - 정규화: Kornormalizer (NumberToKorean, AlphabetToKorean)
   - 데이터셋: HuggingFace datasets (`save_to_disk` / `load_from_disk`)
-  - 형태소 분석: kiwipiepy (복합명사 분리용)
 - [x] 데이터 로더 모듈 구현 ([src/taps/data/loader.py](../src/taps/data/loader.py))
   - `download_and_save()`: HuggingFace → 로컬 저장
   - `load_local()`: 로컬 데이터셋 로드 (인터넷 불필요)
