@@ -58,3 +58,7 @@ scratch/
 
 # Personal helper scripts
 scripts/
+
+# Claude Code (local only)
+.claude/
+CLAUDE.md
