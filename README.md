@@ -54,7 +54,7 @@ TAPS 데이터셋(Training/Validation)을 대상으로 한국어 음성 데이�
 - **ASR 모델**: Whisper Large-v3 (`Systran/faster-whisper-large-v3`)
   - 설정: beam_size=5, language="ko", temperature=[0.0, 0.2, 0.4]
   - TAPS Test CER: 6.71%
-- 정규화 엔진: 규칙 기반(Regex/룰) + 필요 시 한국어 형태소 도구(예: Kiwi) 보조
+- **정규화 엔진**: [Kornormalizer](https://github.com/LetsGoKDH/Kornormalizer) (규칙 기반 + kiwipiepy)
 - 테스트: `pytest`
 - 코드 품질(선택): `ruff` / `black`
 - 평가: CER/WER 계산 스크립트(한국어 정규화 반영)
@@ -79,20 +79,23 @@ pip install -r requirements.txt
 $env:PYTHONPATH="src"
 ```
 
-### Normalizer 사용 (Using Normalizer)
+### Kornormalizer 사용 (Using Kornormalizer)
 
 ```python
-from taps.normalizer import normalize_v064
+from kornormalizer import Normalizer
 
-# 기본 사용
-text = "2024년 1월 5일 COVID-19 확진자 350명"
-normalized = normalize_v064(text)
-print(normalized)
-# 출력: 이천 이십사 년 일 월 오 일 코로나 일구 확진자 삼백 오십 명
+# 기본 사용 (숫자, 알파벳 변환)
+normalizer = Normalizer()
+result = normalizer.normalize("2024년 KBS 방송")
+# → "이천 이십 사 년 케이 비 에스 방송"
 
-# 디버그 모드
-normalized = normalize_v064(text, debug=True)
+# 복합명사 분리 포함
+normalizer = Normalizer(use_noun_splitter=True)
+result = normalizer.normalize("데이터베이스시스템 구축")
+# → "데이터베이스 시스템 구축"
 ```
+
+> **Note**: Kornormalizer는 별도 저장소에서 관리됩니다: [LetsGoKDH/Kornormalizer](https://github.com/LetsGoKDH/Kornormalizer)
 
 ### 데이터셋 로드 (Loading Dataset)
 
