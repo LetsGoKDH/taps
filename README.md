@@ -94,6 +94,26 @@ print(normalized)
 normalized = normalize_v064(text, debug=True)
 ```
 
+### 데이터셋 로드 (Loading Dataset)
+
+```python
+from taps.data import download_and_save, load_local
+
+# 처음 한 번만 실행 (인터넷 필요, ~5분 소요)
+download_and_save()
+# 저장 위치: ./data/taps_dataset/
+
+# 이후부터는 로컬에서 로드 (인터넷 불필요, 빠름)
+ds = load_local()
+train = ds["train"]
+dev = ds["dev"]
+test = ds["test"]
+
+# 특정 split만 로드
+from taps.data import get_split
+train_only = get_split("train")
+```
+
 ### 테스트 노트북 실행 (Running Test Notebook)
 
 Jupyter Notebook으로 ASR + 정규화 파이프라인을 테스트할 수 있습니다:
