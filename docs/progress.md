@@ -46,8 +46,18 @@
 - [x] 도메인 조사 문서 작성 ([docs/3.2_korean_domain_analysis.md](./3.2_korean_domain_analysis.md))
 
 ### 3.3 라벨링 자동화 워크플로우 구성
-- [ ] 워크플로우 설계
-- [ ] 도구 선정
+- [x] 워크플로우 설계 (2026-01-13)
+  - 폴더 구조 정의: `data/taps_dataset/`, `data/outputs/`, `data/triage/`
+  - 4단계 파이프라인: ASR → 트리아지 → 검수 → 정규화
+- [x] 도구 선정
+  - ASR: Whisper Large-v3 (`Systran/faster-whisper-large-v3`)
+  - 정규화: Kornormalizer (NumberToKorean, AlphabetToKorean)
+  - 데이터셋: HuggingFace datasets (`save_to_disk` / `load_from_disk`)
+  - 형태소 분석: kiwipiepy (복합명사 분리용)
+- [x] 데이터 로더 모듈 구현 ([src/taps/data/loader.py](../src/taps/data/loader.py))
+  - `download_and_save()`: HuggingFace → 로컬 저장
+  - `load_local()`: 로컬 데이터셋 로드 (인터넷 불필요)
+- [x] 워크플로우 설계 문서 작성 ([docs/3.3_workflow_design.md](./3.3_workflow_design.md))
 
 ### 3.4 라벨링 자동화 워크플로우 구현
 - [ ] 워크플로우 구현
@@ -93,11 +103,12 @@
 
 ## 다음 단계 (Next Steps)
 
-1. **Kornormalizer 완성**: 시간/날짜 세부 규칙, 고유어/한자어 수사 문맥 판단 로직 구현
-2. **TAPS 프로젝트 통합**: Kornormalizer를 src/taps/normalizer.py에 통합 또는 의존성으로 추가
-3. **라벨 스키마 정의**: sample_id 기준 필드 정의 (`text_raw`, `text_verified`, `text_normalized`, 트리아지 메타데이터)
-4. **로드맵 3.3 시작**: 라벨링 자동화 워크플로우 설계
+**로드맵 3.4 라벨링 자동화 워크플로우 구현**:
+1. **ASR 파이프라인 구현**: Whisper Large-v3 래퍼, 배치 처리
+2. **트리아지 시스템 구현**: 신뢰도 점수 계산, A/B/C 버킷팅 로직
+3. **검수 인터페이스 구현**: 수정 로그 기록
+4. **정규화 연동**: Kornormalizer 통합
 
 ---
 
-*최종 업데이트: 2026-01-12*
+*최종 업데이트: 2026-01-13*

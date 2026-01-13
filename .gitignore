@@ -34,7 +34,7 @@ HF_TOKEN*
 huggingface_token*
 
 # Data / audio / large files (DO NOT COMMIT)
-data/
+/data/
 datasets/
 cache/
 outputs/
