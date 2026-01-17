@@ -62,3 +62,5 @@ scripts/
 # Claude Code (local only)
 .claude/
 CLAUDE.md
+
+nul
