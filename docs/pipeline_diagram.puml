@@ -1,0 +1,42 @@
+@startuml
+skinparam componentStyle rectangle
+
+actor Human as H
+
+component "HuggingFace Dataset\n(1000 Acoustic)" as DS
+component "ASR: Whisper\n(faster-whisper)" as ASR
+component "correct_model" as CM
+component "Excel Review Loop" as XL
+component "kornormalizer" as KN
+component "verifier\n(TBD)" as VF
+
+database "asr_results.jsonl" as ASRJSON
+database "issues.jsonl" as ISSUES
+database "review.xlsx" as XLSX
+database "resolutions.jsonl" as RESO
+database "text_avail_final.jsonl" as AVAIL
+database "text_normalized_pred.jsonl" as NORM
+database "text_fin.jsonl" as FIN
+
+DS --> ASR : acoustic audio
+ASR --> ASRJSON : text_raw + meta\n(avg_logprob, ...)
+
+ASRJSON --> CM : utterance record
+CM --> ISSUES : text_check (issues)
+CM --> AVAIL : text_avail (auto-fixed only)
+
+ISSUES --> XL : export
+XL --> XLSX : review.xlsx
+H --> XLSX : edit user_fix
+XLSX --> XL : import
+XL --> RESO : resolutions (audit + training logs)
+XL --> AVAIL : text_avail_final
+
+AVAIL --> KN : canonical text
+KN --> NORM : text_normalized
+
+NORM --> VF : normalized text
+VF --> FIN : text_fin
+VF --> ISSUES : text_check2 (optional)
+
+@enduml

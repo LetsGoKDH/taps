@@ -1,0 +1,17 @@
+@startuml
+actor Human as H
+participant "ASR(Whisper)" as ASR
+participant "correct_model" as CM
+participant "Excel Loop" as XL
+participant "kornormalizer" as KN
+participant "verifier" as VF
+
+H -> ASR : Provide audio (acoustic)
+ASR -> CM : text_raw + meta
+CM -> XL : issues (text_check) + auto-fixed text_avail
+XL -> H : review.xlsx (recommended prefilled)
+H -> XL : edit user_fix
+XL -> KN : text_avail_final
+KN -> VF : text_normalized
+VF -> H : (optional) text_check2 for final review
+@enduml

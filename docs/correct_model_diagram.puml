@@ -1,0 +1,23 @@
+@startuml
+skinparam componentStyle rectangle
+
+component "correct_model" as CM {
+  component "Span Finder\n(rules/signals only)" as SF
+  component "BTC Rewriter\n(ByT5-Korean fine-tuned)" as BTC
+  component "Decision Layer\n(policy/guardrails/triage)" as DL
+  component "Issue Builder\n(schema + context)" as IB
+}
+
+database "asr_results.jsonl" as ASRJSON
+database "issues.jsonl" as ISSUES
+database "text_avail.jsonl" as AVAIL
+
+ASRJSON --> SF : text_raw + meta
+SF --> BTC : span/context queries
+BTC --> DL : candidates Top-K + scores
+SF --> DL : risk tags (N3/E2/U1/OOV)\n+ bucket signals
+DL --> IB : selected recommended + action\n(AUTO_FIX / NEEDS_REVIEW)
+IB --> ISSUES : issues.jsonl
+DL --> AVAIL : text_avail (only if AUTO_FIX)
+
+@enduml
