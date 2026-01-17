@@ -59,8 +59,25 @@
 - [x] 워크플로우 설계 문서 작성 ([docs/3.3_workflow_design.md](./3.3_workflow_design.md))
 
 ### 3.4 라벨링 자동화 워크플로우 구현
-- [ ] 워크플로우 구현
-- [ ] 통합 테스트
+- [x] ASR 모듈 구현 (2026-01-13)
+  - Whisper Large-v3 래퍼 (`src/taps/asr/transcriber.py`)
+  - faster-whisper 기반, 배치 처리 지원
+  - TranscriptionResult 데이터 클래스 (text, avg_logprob, compression_ratio 등)
+- [x] 트리아지 모듈 구현 (2026-01-13)
+  - TriageScorer (`src/taps/triage/scorer.py`)
+  - A/B/C 버킷 분류 (avg_logprob 기반)
+  - Hard fail 조건: compression_ratio > 4.0, 반복 n-gram, 최소 길이
+- [x] 데이터 로더 개선
+  - HuggingFace 캐시 직접 로드 지원 (`load_from_hf_cache()`)
+  - 오디오 디코딩 처리 (soundfile 사용)
+- [x] 파이프라인 통합 (`src/taps/pipeline.py`)
+  - LabelingPipeline 클래스: ASR → 트리아지 → 정규화
+  - 외부 정규화 패키지 연동 (Kornormalizer)
+  - 결과 저장/로드, 통계 출력 기능
+- [x] 통합 테스트 완료
+  - 3개 샘플 테스트: 모두 bucket A (high_confidence)
+  - avg_logprob: -0.05 ~ -0.08 (높은 신뢰도)
+- [x] 워크플로우 구현 문서 작성 ([docs/3.4_workflow_implementation.md](./3.4_workflow_implementation.md))
 
 ### 3.5 검증 시스템 구현 및 검증
 - [ ] 검증 시스템 구현
@@ -102,11 +119,10 @@
 
 ## 다음 단계 (Next Steps)
 
-**로드맵 3.4 라벨링 자동화 워크플로우 구현**:
-1. **ASR 파이프라인 구현**: Whisper Large-v3 래퍼, 배치 처리
-2. **트리아지 시스템 구현**: 신뢰도 점수 계산, A/B/C 버킷팅 로직
-3. **검수 인터페이스 구현**: 수정 로그 기록
-4. **정규화 연동**: Kornormalizer 통합
+**로드맵 3.5 검증 시스템 구현 및 검증**:
+1. **검증 시스템 구현**: 정규화 결과 검증, 엣지케이스 탐지
+2. **엣지케이스 테스트**: 숫자, 영문, 복합명사 등 특수 케이스
+3. **전체 데이터셋 처리**: Train/Dev/Test split 전체 파이프라인 실행
 
 ---
 

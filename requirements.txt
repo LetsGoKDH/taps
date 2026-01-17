@@ -2,6 +2,12 @@
 kiwipiepy>=0.15.0
 datasets>=2.14.0
 
+# correct_model v1 dependencies
+transformers>=4.30.0
+rapidfuzz>=3.0.0
+openpyxl>=3.1.0
+numpy>=1.24.0
+
 # Testing
 pytest>=7.4.0
 

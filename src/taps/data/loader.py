@@ -133,6 +133,38 @@ def is_dataset_downloaded(load_path: str = None) -> bool:
     return load_path.exists()
 
 
+def load_from_hf_cache(hf_cache_dir: str = "D:/hf_cache") -> DatasetDict:
+    """
+    HuggingFace 캐시에서 직접 데이터셋을 로드합니다.
+
+    save_to_disk()가 메모리 문제로 실패한 경우에도 이미 다운로드된
+    HuggingFace 캐시에서 데이터셋을 로드할 수 있습니다.
+
+    Args:
+        hf_cache_dir: HuggingFace 캐시 디렉토리 (기본: D:/hf_cache)
+
+    Returns:
+        DatasetDict: 로드된 데이터셋
+
+    사용 예시:
+        >>> from taps.data import load_from_hf_cache
+        >>> ds = load_from_hf_cache()
+        >>> train = ds["train"]
+    """
+    cache_path = f"{hf_cache_dir}/datasets"
+    os.makedirs(cache_path, exist_ok=True)
+
+    print(f"HuggingFace 캐시에서 로드 중: {cache_path}")
+    ds = load_dataset(DATASET_NAME, cache_dir=cache_path)
+
+    print(f"로드 완료!")
+    print(f"  - Train: {len(ds['train'])} 샘플")
+    print(f"  - Dev: {len(ds['dev'])} 샘플")
+    print(f"  - Test: {len(ds['test'])} 샘플")
+
+    return ds
+
+
 # CLI로 실행할 경우
 if __name__ == "__main__":
     import sys
